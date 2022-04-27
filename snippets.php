@@ -1,3 +1,5 @@
+ <?php
+
  $arr1 = ["Juma", "Nichole"];
  $arr2 = ["wife" => "Nichole", "husband"=> "Juma"]
 
@@ -5,8 +7,10 @@
 print_r($arr1);
 
 //isset
-isset() is used to confirm if the value of a condition is true
-example
+
+//isset() is used to confirm if the value of a condition is true
+//example
+
 if(isset(1==1)){
 	echo "condition is true";
 }else{
@@ -46,8 +50,9 @@ $i++;
 
 }
 
+//================================
 //functions
-
+//================================
 
 $greeting = "Hello there!"
 
@@ -61,7 +66,7 @@ $greeting = "Hello there!"
  }
 
 //Array columns
-$ members = [
+$members = [
 	["name"=> "Nichole", "role"=> "wife"],
 	["name"=> "Juma", "role"=> "husband"],
 	["name"=> "Alva", "role"=> "son"]
@@ -77,7 +82,7 @@ $filtered = array_filter($arr, function(){});
 
 $newArr =  array_map(function(){}, $arr);
 
-example
+//example
 function modifyArray($arr, $key){ //key is the key to be modified
 
 	return array_map(function($each) use($key) { return member[$key]." good"}, $arr);
@@ -90,31 +95,36 @@ function modifyArray($arr, $key){ //key is the key to be modified
 
 
 
-modifyArray($members, "role")
+modifyArray($members, "role");
+
 
 //PHP INCLUDE AND PHP REQUIRE
 
-include() is used to import files stored inside the include/inc folder
-example
+//include() is used to import files stored inside the include/inc folder
+//example
 include('../../inc/header.php');
 
-require() method also works like include() but it will throw an error if it cannot find the specific file unlike
-include()
+//require() method also works like include() but it will throw an error if it cannot find the specific 
+//file unlike include()
 
-use require_once() if you want to import a function or a file just once so you can eliminate redundancies
-by importing it multiple times.
+//use require_once() if you want to import a function or a file just once so you can eliminate redundancies
+//by importing it multiple times.
 
+
+//================================
 //USER INPUT AND SAVING DATA IN PHP
+//================================
+
 //GET request
-We get user get request from a query string which begins after ?
-example www.google.com/search?source=hp&q=php
-the (query parameters)/key value pairs of the query string are separated by &
+//We get user get request from a query string which begins after ?
+//example www.google.com/search?source=hp&q=php
+//the (query parameters)/key value pairs of the query string are separated by &
 
-if we include productId and limit as query parameters in the query string, then we can handle that GET
-request on the php server as below
-www.domain/productId=10&limit=5
+//if we include productId and limit as query parameters in the query string, then we can handle that GET
+//request on the php server as below
+//www.domain/productId=10&limit=5
 
-Then on the server we will write;
+//Then on the server we will write;
 
 $productId = $_GET["productId"]; 
 $limit = $_GET["limit"];
@@ -123,35 +133,38 @@ $limit = $_GET["limit"];
 // the keys of the query parameters. We don't have to specify/define super global variable, we just use them
 // in any part of the application without defining them as global.
 
-so we can output the productId and limit on the html like below
+//so we can output the productId and limit on the html like below
 
 <div> <?= $productId; ?> </div>
 // We add  = when writing php code on html
 
 
-We use filter_input() method to perform validation on user input during GET/POST request, to protect the application 
-from malicious user input.
+//We use filter_input() method to perform validation on user input during GET/POST request, to protect the application 
+//from malicious user input.
 
-example
+//example
 $category = filter_input(INPUT_GET, "category", FILTER_VALIDATE_INT);
 
 // We filtered the user input on GET request for category query parameter to ensure that whatever is 
 // passed to the category query parameter is an integer. If it isn't an interger, false will be returned.
 
-There are other types of php built in filters other than validate filters.
+//There are other types of php built in filters other than validate filters.
+
 
 
 
 //PHP POST REQUESTS
-To receive POST request, we write the code below;
+
+//To receive POST request, we write the code below;
 
 $_POST["email"];
 
-the email string is the value of the name attribute we added to input form 
-example
-<form>  <input type="email" name="email" id="email" /> </form>
+//the email string is the value of the name attribute we added to input form 
+//example
 
-To check whether request is a GET/POST request we use a super global variable  $_SERVER like below
+<form>  <input type="email" name="email" id="email" /> </form> 
+
+//To check whether request is a GET/POST request we use a super global variable  $_SERVER like below
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -161,7 +174,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // the above code implies that if the request method is POST, then we want to echo the $_POST super global.
 
-We could also use $_SERVER["REQUEST_METHOD"] == "GET" to look for get requests
+//We could also use 
+$_SERVER["REQUEST_METHOD"] == "GET" ;//to look for get requests
 
 
 
@@ -175,13 +189,15 @@ if($_SERVER["REQUEST_METHO"] == "POST"){
 
 
 
-
+//================================
 //PHP SESSIONS
+//================================
 
-In php sessions we have to start a session in order to use sessions.
-We use have to add session_start() method on top whenever we want to utilize sessions in our application.
-example
-INDEX.PHP FILE
+//In php sessions we have to start a session in order to use sessions.
+//We use have to add session_start() method on top whenever we want to utilize sessions in our application.
+//example
+
+//INDEX.PHP FILE
 
 session_start();
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -210,8 +226,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 }
 
-ADMIN.PHP FILE
-<?php
+//ADMIN.PHP FILE
+//<?php
 session_start();
 
 function isUserAuthenticated(){
@@ -223,10 +239,10 @@ function isUserAuthenticated(){
 
 echo $_SESSION["email"]; // email of the logged in user is printed out on the admin page.
 
-LOGOUT.PHP
-To log the user out, we will write the below code:
+//LOGOUT.PHP
+//To log the user out, we will write the below code:
 
-<?php
+//<?php
 session_start();
 session_unset(); //this unsets all the variables we had set in the session
 session_destroy(); // we destroy the session
@@ -234,14 +250,19 @@ session_destroy(); // we destroy the session
 header("Location: login.php"); // we then redirect the user to login page
 die();
 
-//WORKING WITH FILES 3hr 15min of Envato tuts
-To check whether a file exists or not, we use file_exists() method
 
-example
+//================================
+//WORKING WITH FILES 3hr 15min of Envato tuts
+//================================
+
+//To check whether a file exists or not, we use
+file_exists() //method
+
+//example
 if( file_exists($variable) ){ do something }
 
-Let's now open, read or write files
-if(file_exists){
+//Let's now open, read or write files
+if(file_exists()){
 	//if file exists, we only want to read the file, nothing else.
 	$fileHandle = fopen($fileName, "r");
 	$json =fread($fileHandle, filesize(fileName)); // we store the content of the read file in json variable
@@ -325,25 +346,26 @@ $obj = (object) $arr;
 to append this object to an array of objects, let's say 
 $arrOfObj = [{"name": "Nicole"}, {"name":"Alva"}];
 
-we will write the below code to append our new $obj to it
+//we will write the below code to append our new $obj to it
 $arrOfObj[] = $obj;
 
-The above code can also be written as 
+//The above code can also be written as 
 array_push($arrOfObj, $obj);
 
-to delete an item from an array, we will write the code below:
+//to delete an item from an array, we will write the code below:
 unset($arrOfObj[index to be deleted]) hence unset($arrOfObj[0]);
 
-After using unset() method, the remaining array is converted to to an object of objects, with former array
-indexes now acting as keys. We don't want this. So we should covert the changed array to true array through: 
+//After using unset() method, the remaining array is converted to to an object of objects, with former array
+//indexes now acting as keys. We don't want this. So we should covert the changed array to true array through: 
 
 $new_array = array_values($arrOfObj)
 
 The above method will take all the values of the changed array and put them into a new array that will be a true array
 
 
-
-INTRODUCTION TO PHP CLASSES
+//================================
+//INTRODUCTION TO PHP CLASSES
+//================================
 
 class Person {
 	function __construct($name, $sex){
@@ -363,7 +385,7 @@ class Person {
 }
 
 //We can hide walkFaster() method so it cannot be used outside the class.
- to do that, we just need to add private keyword before the function like below
+ //to do that, we just need to add private keyword before the function like below
  private function walkFaster(){} 
 
 //We could also add public keyword for the rest of the methods that can be accessed publicly outside the function.
@@ -373,8 +395,8 @@ $obj1->walk(); //this is the way we access the method of an object in php
 echo $obj1->name; // prints 
 
 //STATIC PROPERTIES AND METHODS
-static methods and properties are not dependent on instances of a class, they exist only in the class.
-Below is a static class
+//static methods and properties are not dependent on instances of a class, they exist only in the class.
+//Below is a static class
 
 class Data {
  static private $dataStore;
@@ -389,17 +411,21 @@ class Data {
  }
 }
 
-A static class doesn't have a constructor, because there are no objects drawn from it.
-To make the Data class accessible to other parts of the application, we will write the below code:
+//A static class doesn't have a constructor, because there are no objects drawn from it.
+//To make the Data class accessible to other parts of the application, we will write the below code:
 
 Data::initialize($database); // we call the constructor and provide it with database data
 
-So now we can use the methods of the Data class like below:
+//So now we can use the methods of the Data class like below:
 Data::getData();
 
+
+
+
 //INHERITANCE
-Here parent class has certain properties and methods that can be inherited by child class, and the child class
-has extra properties and methods that are specific to that child.
+
+//Here parent class has certain properties and methods that can be inherited by child class, and the child class
+//has extra properties and methods that are specific to that child.
 
 class Pen {
 	
@@ -409,11 +435,11 @@ class Pen {
 	}
 	
 	public function write($message){
-		echo $message
+		echo $message;
 	}
 }
 
-The above class is the parent class. Let's write the code for child class below:
+//The above class is the parent class. Let's write the code for child class below:
 
 class PenWithCap extends Pen{
 	public function toggleCap(){
@@ -433,8 +459,9 @@ $cappedPen->toggleCap();         //toggleCap() method is from the current child 
 	}
 
 
+
 //HANDLING ERRORS
-we use try catch block as written below:
+//we use try catch block as written below:
 
 try{
 
@@ -443,21 +470,28 @@ try{
 }
 
 
-
+//================================
 //NAMED ARGUMENTS IN PHP
+//================================
 
-let's consider imaginary function getData($name, $age){ return $name . $age}
-to call the function with named arguments, we would write the code below:
+//let's consider imaginary function getData($name, $age){ return $name . $age}
+//to call the function with named arguments, we would write the code below:
 
 getData(name:"Juma", age: 25);
 
-Here, the arguments are preceded by the parameter names.
+//Here, the arguments are preceded by the parameter names.
 
-To check if a string contains a certain substring we use str_contains() method and returns either true of false.
-example
+
+
+//To check if a string contains a certain substring we use str_contains() method and returns either true of false.
+//example
 str_contains($str, $substr);  // The first arg is the whole string, the second is the substring being tested
 
-str_starts_with($str, $substring) // This method is used to check if the substring being tested begins the whole 
+str_starts_with($str, $substring); // This method is used to check if the substring being tested begins the whole 
 //string. It also returns true or false
 
-str_ends_with($str, $substring) // checks whether the substring passed ends the string. Also returns true or false.
+
+str_ends_with($str, $substring); // checks whether the substring passed ends the string. Also returns true or false.
+
+
+?>
